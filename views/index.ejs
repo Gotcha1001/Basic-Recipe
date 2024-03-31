@@ -1,0 +1,85 @@
+<%- include('partials/header.ejs') %>
+
+<body class="gradient-background2">
+    <div class="container">
+
+   
+
+        <h1 class="text-center my-4">Shared Recipes</h1>
+
+        <!--Button to create a new recipe-->
+        <button onclick="redirectToCreatePage()" class="btn btn-primary mb-4">Create Recipe Post</button>
+
+        <!--Display from database-->
+        <div class="row">
+            <% recipes.forEach(recipe => { %>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <%= recipe.user_name %> : Posted
+                            </h5>
+                            <h5 class="card-text"> Recipe Name:
+                                <%= recipe.title %>
+                            </h5>
+                            <img src="<%= recipe.image_url %>" alt="food image" class="img-fluid">
+                            <h6>Ingredients:</h6>
+                            <ul>
+                                <% recipe.ingredients.split(',').forEach(ingredient => { %>
+                                <li><%= ingredient.trim()  %></li> 
+                               <% }) %>
+                            </ul>
+                            <p class="card-text">Recipe: <%= recipe.recipe %></p>
+                            
+                            <!--Button to modify the recipe-->
+                            <form action="/modify/<%= recipe.id %>" method="get">
+                                <button type="submit" class="btn btn-primary">Modify</button>
+                            </form>
+                            
+
+                            <!--Form for Deleting the recipe-->
+                            <form action="/delete" method="post">
+                                <input type="hidden" name="deleteItemId" value="<%= recipe.id %>">
+                                <button style="margin-top: 10px;" type="submit"
+                                class="btn btn-danger">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+          <% }) %>
+        </div>
+
+        <!--Form to create a new user and buttons for each user
+        <% users.forEach(user => { %>
+            <button class="btn btn-primary my-4" onclick="changeUser('<%= user.id %>')"><%= user.username %></button>
+        <% }) %>
+        
+        <form action="/users" method="post">
+            <input type="text" name="username" placeholder="Enter username" required>
+            <button type="submit" class="btn btn-primary">Create User</button>
+        </form>
+    </div>
+    -->
+
+    <script>
+        function redirectToModifyPage(id) {
+            window.location.href = '/modify/' + encodeURIComponent(id);
+        }
+
+        function redirectToCreatePage() {
+            window.location.href = '/create';
+        }
+
+        /*
+        function changeUser(userId) {
+            window.location.href = `/?userId=${userId}`;
+        }
+
+        */
+       
+    </script>
+
+<%- include('partials/footer.ejs') %>
+</body>
+</html>
+

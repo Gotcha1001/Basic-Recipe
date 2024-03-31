@@ -1,0 +1,29 @@
+.gradient-background2 {
+    background: linear-gradient(300deg, #f3f2f5, #26054d, #010003);
+    background-size: 180% 180%;
+    animation: gradient-animation 12s ease infinite;
+  
+   /*background-size: cover; */
+    
+    background-attachment: fixed; /* Keep background fixed when scrolling */
+    
+  }
+  
+  
+  @keyframes gradient-animation {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  footer {
+    flex: 0 0 auto;
+    color: white;
+    text-align: center;
+  }
